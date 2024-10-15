@@ -47,12 +47,12 @@ body,html{
   right:0;
 }
 .sphere{
-  width:50%;
+  display:block;
+  width:100%;
   z-index: 1;
   top:0;
   left:0;
-  position: absolute;
-  margin-left: 20vw;
+  position: relative;
 }
 .robo{
   width:50%;
@@ -170,8 +170,7 @@ body,html{
   color:white;
   font-size:100px;
   position: relative;
-  right:100px;
-  width:40%;
+  width:50%;
   height:50%;
   margin-top: 20%;
   z-index:999;
@@ -221,7 +220,23 @@ body,html{
 .about{
   position:relative;
 }
-
+@media (max-width: 768px) {
+  .navbar{
+    width:10%;
+  }
+  .right{
+    width:90%;
+  }
+  .whole{
+    display:flex;
+    justify-content: space-between;
+  }
+  .home{
+    display:flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+}
 @keyframes GradientBackground {
   0% {
     background-position: 0% 50%;

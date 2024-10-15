@@ -39,6 +39,7 @@ const sizes = {
   width:window.innerWidth,
   height:window.innerHeight,
 }
+
 //light
 
 const light = new THREE.PointLight( 0xFADA7D, 30000);
@@ -97,18 +98,17 @@ loader.load(
 
        
 const canvas = document.querySelector(".sphere");
-const renderer = new THREE.WebGLRenderer({  canvas: canvas, // Your existing canvas selected via querySelector
+const renderer = new THREE.WebGLRenderer({ // Your existing canvas selected via querySelector
   alpha: true})
 renderer.setClearColor(0x000000, 0);
 renderer.setSize(sizes.width,sizes.height)
 renderer.setPixelRatio(2)
-document.body.appendChild(renderer.domElement);
+canvas.appendChild(renderer.domElement);
 
         // Set clear color to transparent
 renderer.setClearColor(0x000000, 0); 
 // renderer.setClearColor( 0x00000, 0);
 renderer.render(scene,camera)
-
 
 //controls
 const controls = new OrbitControls(camera, canvas )
@@ -123,7 +123,7 @@ const controls = new OrbitControls(camera, canvas )
   sizes.width = window.innerWidth;
   sizes.height = window.innerHeight;
   camera.aspect = sizes.width/sizes.height;
-  camera.updateProjectionMatrix();
+   camera.updateProjectionMatrix();
   renderer.setSize(sizes.width,sizes.height) 
  })
 
@@ -152,7 +152,7 @@ const loop = ()=>{
     // Smoothly interpolate the model's rotation towards the target rotation
     model.rotation.y += (targetRotationY - model.rotation.y) * rotationSpeed;
 }
-    
+  
  renderer.render(scene,camera)
  window.requestAnimationFrame(loop)
 }
