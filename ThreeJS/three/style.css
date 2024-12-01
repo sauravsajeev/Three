@@ -139,6 +139,16 @@ body,html{
   font-size: 18px;
   overflow:hidden;
   margin-top: 40px;
+  transition: all .3s ease;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+}
+.navigate a i{
+display: none;
+ margin-right:3px;
+ opacity: 0;
 }
 .navigate a:hover{
   color: #FADA7D;
@@ -147,6 +157,11 @@ body,html{
   -moz-transform: scale(1.03);
   -ms-transform: scale(1.03);
   -o-transform: scale(1.03);
+}
+
+.navigate a:hover i {
+  display: inline;
+  opacity: 1;
 }
 .socials{
   margin-top:25px;
@@ -157,6 +172,9 @@ body,html{
   font-weight: 400;
   font-style: normal;
   color:#ffffff;
+}
+.socials p::after{
+  content: "saurav2024";
 }
 .home{
   height:100%;
@@ -205,7 +223,6 @@ body,html{
 .home .title h1:hover{
   color:#FADA7D;
 }
-
 .home .title h1 span{
   color:#FADA7D;
   font-size: 100px;
@@ -217,15 +234,56 @@ body,html{
 .home .title h1:hover span{
   color:white;
 }/* Change this value to other blend modes as desired */
-.about{
-  position:relative;
+
+.model-canvas {
+  width: 50%;
+  height: 50vh;
+
 }
+/* Style for About Me section */
 @media (max-width: 768px) {
   .navbar{
-    width:10%;
+    width:15%;
+    border-width: 2px;
+    box-shadow: 0 0 5px 10px #070707;
+  }
+  .navbar .logo{
+    display: none;
+  }
+  .navbar:hover{
+    box-shadow: 0 0 10px 20px #070707;
+
   }
   .right{
     width:90%;
+  }
+  .robo{
+   display: none;
+  }
+  .navigate a span{
+    display: none;
+  }
+  .navigate{
+    height:80%;
+  }
+  .navigate a{
+    margin-top: 100px;
+  }
+  .navigate a i{
+    opacity: 1;
+    display: block;
+    font-size: 25px;
+  }
+  .socials p::after{
+content: "2024";
+  }
+  .home .title{
+    width:100%;
+    position:relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
   }
   .whole{
     display:flex;
@@ -233,10 +291,39 @@ body,html{
   }
   .home{
     display:flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-direction: column;
+    align-items: center;
   }
-}
+  .home .title h2 span{
+    width:100%;
+    font-size:30px;
+    line-height:normal;
+  }
+  .home .title h2{
+   line-height: 110px;
+  }
+  .home .title h1{
+    color:#ffffff;
+    font-size: 46px;
+    margin-left: 3%;
+    display:flex;
+    justify-content: center;
+    text-align: center;
+  }
+  .home .title h4{
+    font-size:20px;
+    width:100%;
+    text-align: center;
+  }
+  .home .title h1 span{
+    color:#FADA7D;
+    font-size: 50px;
+    letter-spacing: 1px;
+  }
+  .room{
+    overflow: hidden;
+  }
 @keyframes GradientBackground {
   0% {
     background-position: 0% 50%;
@@ -250,3 +337,4 @@ body,html{
     background-position: 0% 50%;
   }
 };
+}

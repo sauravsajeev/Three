@@ -3,6 +3,13 @@ import * as THREE from "three";
 import "./style.css";
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { getFirstObjectWithName } from '/help/help.js';
+import gsap from 'gsap';
+
+
 var typed = new Typed('#typed', {
   strings: ['Web Developer!', 'B-TECH Student!'],
   typeSpeed: 50,
@@ -61,12 +68,7 @@ camera.position.z =20
 scene.add(camera)
 const loader = new GLTFLoader();
 let model;
-
-
-// Time before returning to the initial position (in milliseconds)
-const returnDelay = 2000;
-let returnTimeout = null; 
-
+  
 function traverseModel(object) {
   object.traverse(function(child) {
       if (child.isMesh) {
@@ -75,6 +77,8 @@ function traverseModel(object) {
       }
   });
 }
+
+
 loader.load(
   'scene.gltf', // Replace with the path to your GLTF/GLB model
   function (gltf) {
@@ -85,7 +89,7 @@ loader.load(
      
     // Optional: Scale and position the model if needed
     model.scale.set(5,5,5);  // Adjust scaling based on model size
-    model.position.set(-10, 1, 0); // Position the model in the scene
+    model.position.set(-10, 0, 0); // Position the model in the scene
   },
   function (xhr) {
     console.log((xhr.loaded / xhr.total * 100) + '% loaded'); // Progress info
@@ -94,10 +98,13 @@ loader.load(
     console.error('An error happened while loading the model:', error);
   }
 );
+
 //renderer
 
        
-const canvas = document.querySelector(".sphere");
+const canvas = document.querySelector(".sphere")
+const rect = canvas.getBoundingClientRect();
+
 const renderer = new THREE.WebGLRenderer({ // Your existing canvas selected via querySelector
   alpha: true})
 renderer.setClearColor(0x000000, 0);
@@ -120,9 +127,11 @@ const controls = new OrbitControls(camera, canvas )
 // controls.autoRotateSpeed = 6
  //resize 
  window.addEventListener("resize", ()=>{
+  
   sizes.width = window.innerWidth;
   sizes.height = window.innerHeight;
   camera.aspect = sizes.width/sizes.height;
+ 
    camera.updateProjectionMatrix();
   renderer.setSize(sizes.width,sizes.height) 
  })
@@ -132,14 +141,16 @@ const controls = new OrbitControls(camera, canvas )
  let mouseX = 0; // Horizontal mouse position
         let targetRotationY = 0; // Target rotation for smooth transition
         const rotationSpeed = 0.05; // Sensitivity of the rotation
-        const maxRotationY = Math.PI / 3; // Max rotation (120 degrees)
-
+        const maxRotationY = Math.PI / 3;
+        const maxRotationY2 = Math.PI / 12;  // Max rotation (120 degrees)
+        let targetRotationY2 = 0; 
         // Update mouse position on mouse move
 function onMouseMove(event) {
             // Convert the mouse position to normalized device coordinates (-1 to 1)
             mouseX = (event.clientX / window.innerWidth) * 2 - 1; // X-axis normalized
             // Calculate the target rotation based on mouse position
-            targetRotationY = mouseX * maxRotationY; // Limit rotation to ±60 degrees
+            targetRotationY = mouseX * maxRotationY; 
+            targetRotationY2 = mouseX * maxRotationY2;// Limit rotation to ±60 degrees
 }
 
         window.addEventListener('mousemove', onMouseMove, false);
@@ -157,3 +168,5 @@ const loop = ()=>{
  window.requestAnimationFrame(loop)
 }
 loop()
+
+
