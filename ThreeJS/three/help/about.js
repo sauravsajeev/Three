@@ -59,6 +59,8 @@ scenes.add(spotLight)
 //CAMERA
 const cameras = new THREE.PerspectiveCamera(45,sizes.width/sizes.height,0.1,1000)
 cameras.position.set(15, 15,-11);
+const helper = new THREE.CameraHelper(cameras);
+scenes.add(helper);
 
 scenes.add(cameras)
 const loaders = new GLTFLoader();
@@ -104,7 +106,7 @@ loaders.load(
               emissive: 0xFADA7D,
               emissiveIntensity:3,
           });
-          
+         
       //     glowingGroup.add(child);
       } else if(child.name  == "Object_116"){
         // For glowing objects, use an emissive material
@@ -113,9 +115,7 @@ loaders.load(
             emissive: 0x9DFFED,
             emissiveIntensity:1.4,
         }); 
-        
-      
-      }
+      } 
       else if(child.name  == "Plane"){
         // For glowing objects, use an emissive material
         child.visible = false;
@@ -128,8 +128,7 @@ loaders.load(
         spotLights.target = child;
         
         // const helpers = new THREE.SpotLightHelper(spotLights);
-        // scenes.add(helpers);
-      }
+         }   // scenes.add(helpers);
       }
     });
    //Replace with the actual name of the screen mesh
@@ -241,6 +240,10 @@ function onClick2(event) {
 
     updateskillcam();
    }
+   else if (page == 'project'){
+    console.log("inside project");
+    updateprojectcam();
+   }
    else{
    }
       // : null;
@@ -346,6 +349,12 @@ function normalpos(){
     cameras.lookAt(new THREE.Vector3(-5.0699995040893555,  7.079998970031738,  20.9600));
     cameras.rotation.z += -0.1;
     lastpos= [-5.5,7.5,1,-5.0699995040893555,  7.079998970031738,  20.9600];
+  }  else if (page =="project") {
+    cameras.position.set(-6, 4,-4.9);
+    cameras.lookAt(new THREE.Vector3(-10.121976852416992, 4.01351928710938, -4.8956985473633));
+    window.location.href = "#project";
+  
+  lastpos= [-3.4, 7.4,-6.1,-10.121976852416992, 7.701351928710938, -5.95456985473633];
   }
 }
 
@@ -368,6 +377,25 @@ function updateskillcam(){
 });
 lastpos =[-5.5,7.5,1,-5.0699995040893555,  7.079998970031738,  20.9600];
 }
+function updateprojectcam(){
+  movementcam =false;
+  model2.rotation.y = 0;
+  cameras.position.set(15, 15,-11);
+  cameras.lookAt(2 ,7.884449005126953, -4.130945205688477);
+  t1.to(cameras.position,{
+    x:-6,
+    y:4,
+    z:-4.9,
+    duration:3,
+    ease:"power3.inOut",
+    onUpdate:function(){
+      cameras.lookAt(new THREE.Vector3(-10.121976852416992, 4.01351928710938, -4.8956985473633));
+        
+    },
+    onComplete:normalpos
+});
+lastpos =[-5.5,7.5,1,-5.0699995040893555,  7.079998970031738,  20.9600];
+}
 
 let mouseX = 0; // Horizontal mouse position
         let targetRotationY = 0; // Target rotation for smooth transition
@@ -380,7 +408,7 @@ function onMouseMove1(event) {
             // Convert the mouse position to normalized device coordinates (-1 to 1)
             mouseX = (event.clientX / window.innerWidth) * 2 - 1; // X-axis normalized
             // Calculate the target rotation based on mouse position
-            targetRotationY = mouseX * maxRotationY; 
+            targetRotationY = mouseX * maxRotationY;      
             targetRotationY2 = mouseX * maxRotationY2;// Limit rotation to ±60 degrees
 }
 window.addEventListener('mousemove', onMouseMove1, false);

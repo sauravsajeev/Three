@@ -7,54 +7,52 @@
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta name="description" content="">
     <title>Saurav</title>
     
   </head>
   <body>
+    <div id = "preloader"></div>
   <div class= "whole">
     <div class = "navbar">
       <div class ="logo">
         <h1><span>S</span>audu</h1> 
       </div>
       <div class = "navigate">
-        <a class = "saudu" href = "#home" onclick = "switchColors(this)"><i class="fa-solid fa-house"></i> <span>Home</span> </a>
+        <a style = "color:#FADA7D;" class = "saudu" href = "#home" onclick = "switchColors(this)"><i class="fa-solid fa-house"></i> <span>Home</span> </a>
         <a class = "saudu" href = "#about"  onclick = "reset('about');switchColors(this);"  ><i class="fa-solid fa-address-card"></i> <span>About Me</span></a>
         <a class = "saudu" href = "#about" onclick = "reset('skills');switchColors(this);"><i class="fa-solid fa-hammer"></i> <span>Skills</span></a>
-        <a class = "saudu"   href = "#home" onclick = "switchColors(this)"><i class="fa-solid fa-tarp"></i> <span>My Projects</span>  </a>
+        <a class = "saudu" href = "#about" onclick = "switchColors(this);reset('project');"><i class="fa-solid fa-tarp"></i> <span>My Projects</span>  </a>
         <a class = "saudu" href = "#home" onclick = "switchColors(this)"><i class="fa-solid fa-address-book"></i> <span>Contact Me</span>  </a>
       </div>
       <div class="socials">
         <p>©</p>
       </div>
     </div>
-    <div class="right">
-   
-    <section id ="home" class = "home">
-      <div class="robo">
-        <div class = "sphere">
+    <div id = "maincon" class="right">
+      <section id ="home" class = "home">
+        <div class="robo">
+          <div class = "sphere">
+          </div>
         </div>
+        <div class ="title block">
+          <h2>HI<span>,</span></h2>
+          <h1>I  AM <span>SAURAV</span></h1> 
+          <h4 >I am a <span id = "typed"></span></h4>
+        </div>
+      </section>
+      <section id ="about" class = "about">
+        <div class="room">
+        </div>
+      <div class="model-container">
+        <div class="model-canvas"></div>
       </div>
-      <div class ="title block">
-        <h2>HI<span>,</span></h2>
-        <h1>I  AM <span>SAURAV</span></h1> 
-        <h4 >I am a <span id = "typed"></span></h4>
+      </section>
+      <div class="model-container">
+        <div class="model-canvas"></div>
       </div>
-    </section>
-    <section id ="about" class = "about">
-      <div class="room">
-      </div>
-    <div class="sectiontitle"><h1>About Me</h1></div>
-    <div class="aboutme"><h2 Class = "name">Saurav V S</h2>
-    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-    <a href="cv.pdf" download="YourName_CV">
-      <button>Download CV</button>
-    </a>
-    </div>
-    <div class="model-container">
-      <div class="model-canvas"></div>
-    </div>
-    </section>
-    </div>
+     </div>
+    <div id ="content"></div>
   </div>
     <div id="app"></div>
     <script type="x-shader/x-vertex" id="vertexshader">
@@ -82,6 +80,11 @@ for (var i = 0 ; i < links.length ; i ++)
 links.item(i).style.color = 'white' ;  
 element.style.color='#FADA7D' ;  
 }  
+var loader = document.getElementById("preloader");
+window.addEventListener("load",function(){
+  loader.style.display = "none";
+})
     </script>
+    <script src="/help/hash-router.js"></script>
   </body>
 </html>
